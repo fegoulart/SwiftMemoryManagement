@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6CA5F301284FCDD20093F34B /* MemoryAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA5F300284FCDD20093F34B /* MemoryAddress.swift */; };
+		6CA5F303284FD2B80093F34B /* MyClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA5F302284FD2B80093F34B /* MyClass.swift */; };
+		6CA5F305284FD2E20093F34B /* MyStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA5F304284FD2E20093F34B /* MyStruct.swift */; };
 		6CC1E3D9284E92E2002A93DE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC1E3D8284E92E2002A93DE /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +26,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6CA5F300284FCDD20093F34B /* MemoryAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAddress.swift; sourceTree = "<group>"; };
+		6CA5F302284FD2B80093F34B /* MyClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClass.swift; sourceTree = "<group>"; };
+		6CA5F304284FD2E20093F34B /* MyStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStruct.swift; sourceTree = "<group>"; };
 		6CC1E3D5284E92E2002A93DE /* Memory */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Memory; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CC1E3D8284E92E2002A93DE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -38,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6CA5F2FF284FCDC40093F34B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				6CA5F300284FCDD20093F34B /* MemoryAddress.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		6CC1E3CC284E92E2002A93DE = {
 			isa = PBXGroup;
 			children = (
@@ -57,7 +71,10 @@
 		6CC1E3D7284E92E2002A93DE /* Memory */ = {
 			isa = PBXGroup;
 			children = (
+				6CA5F2FF284FCDC40093F34B /* Helper */,
+				6CA5F302284FD2B80093F34B /* MyClass.swift */,
 				6CC1E3D8284E92E2002A93DE /* main.swift */,
+				6CA5F304284FD2E20093F34B /* MyStruct.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -120,7 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CA5F305284FD2E20093F34B /* MyStruct.swift in Sources */,
 				6CC1E3D9284E92E2002A93DE /* main.swift in Sources */,
+				6CA5F301284FCDD20093F34B /* MemoryAddress.swift in Sources */,
+				6CA5F303284FD2B80093F34B /* MyClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

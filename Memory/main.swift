@@ -1,45 +1,59 @@
+//
+//  MyStruct.swift
+//  Memory
+//
+//  Created by Fernando Luiz Goulart on 07/06/22.
+//
+
 import Foundation
 
-class MyClass {
-    var value: String
-
-    init(_ value: String) {
-        self.value = value
-    }
-}
-
 do {
-    let object1 = MyClass("my value")
+
+    // 2 classes
+
+    let object1 = MyClass("value")
     let object1Memory = MemoryAddress<MyClass>(of: object1)
     let object1ValueMemory = MemoryAddress(of: &object1.value)
-    print("Debug - Object1 Memory Address: ", object1Memory.description)
-    print("Debug - Object1 Value Memory Address", object1ValueMemory.description)
+    print("Debug - Object1 Memory Address:", object1Memory.description)
+    print("Debug - Object1 Value Memory Address:", object1ValueMemory.description)
+    let object2 = object1
+    let object2Memory = MemoryAddress<MyClass>(of: object2)
+    let object2ValueMemory = MemoryAddress(of: &object2.value)
+    print("Debug - Object2 Memory Address:", object2Memory.description)
+    print("Debug - Object2 Value Memory Address:", object2ValueMemory.description)
 
-    if let stringPointer:UnsafeMutablePointer = UnsafeMutablePointer<String>(bitPattern: object1ValueMemory.intValue) {
-        stringPointer.pointee = "another value"
-        print(object1.value) // Expected: another value
-        stringPointer.deinitialize(count: 1)
-    }
-}
-struct MemoryAddress<T>: CustomStringConvertible {
+    // 2 structs
 
-    let intValue: Int
+    var struct1 = MyStruct("value")
+    let struct1Memory = MemoryAddress(of: &struct1)
+    let struct1ValueMemory = MemoryAddress(of: &struct1.value)
+    print("Debug - Struct1 Memory Address:", struct1Memory.description)
+    print("Debug - Struct1 Value Memory Address", struct1ValueMemory.description) // Classes need 16 bytes metadata for swift management
+    var struct2 = struct1
+    let struct2Memory = MemoryAddress(of: &struct2)
+    let struct2ValueMemory = MemoryAddress(of: &struct2.value)
+    print("Debug - Struct2 Memory Address:", struct2Memory.description)
+    print("Debug - Struct2 Value Memory Address:", struct2ValueMemory.description)
 
-    var description: String {
-        let length = 2 + 2 * MemoryLayout<UnsafeRawPointer>.size
-        return String(format: "%0\(length)p", intValue)
-    }
+    // Changing object1Value
+    if let object1ValueMemoryAddress = object1ValueMemory.intValue, let object1ValuePointer:UnsafeMutablePointer = UnsafeMutablePointer<String>(bitPattern: object1ValueMemoryAddress) {
+        object1ValuePointer.pointee = "another value"
 
-    // for structures
-    init(of structPointer: UnsafePointer<T>) {
-        intValue = Int(bitPattern: structPointer)
-    }
-}
+        print("Debug - Object1Value:", object1.value)
+        print("Debug - Object2Value:", object2.value)
 
-extension MemoryAddress where T: AnyObject {
+        defer {
+            object1ValuePointer.deinitialize(count: 1)
+        }
 
-    // for classes
-    init(of classInstance: T) {
-        intValue = Int(bitPattern: Unmanaged<T>.passUnretained(classInstance).toOpaque())
+        // Changing struct1Value
+        if let struct1ValueMemoryAddress = struct1ValueMemory.intValue, let struct1ValuePointer:UnsafeMutablePointer = UnsafeMutablePointer<String>(bitPattern: struct1ValueMemoryAddress) {
+            struct1ValuePointer.pointee = "another value"
+
+            print("Debug - Struct1Value", struct1.value)
+            print("Debug - Struct2Value", struct2.value)
+
+            struct1ValuePointer.deinitialize(count: 1)
+        }
     }
 }
